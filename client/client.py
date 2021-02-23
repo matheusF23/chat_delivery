@@ -1,10 +1,16 @@
 # Echo client program
 import socket
+import json
 
-HOST = 'localhost'    # The remote host
-PORT = 40000              # The same port as used by the server
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
-    s.sendall(b'Hello, world')
-    data = s.recv(1024)
-print('Received', data.decode())
+
+HOST = 'localhost'
+PORT = 40000
+
+def connection(payload, host=HOST, port=PORT):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
+        client.connect((host, port))
+        payload_str = str.encode(json.dumps(payload))
+        client.sendall(payload_str)
+
+        response = client.recv(1024)
+    return json.loads(response.decode())
