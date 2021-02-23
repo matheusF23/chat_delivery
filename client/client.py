@@ -1,14 +1,10 @@
+# Echo client program
 import socket
 
-
-HOST = 'localhost'
-PORT = 40000
-
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((HOST, PORT))
-
-client.sendall(str.encode('Hello socket'))
-
-data = client.recv(1024)
-
-print(f'Mensagem ecoada: {data.decode()}')
+HOST = 'localhost'    # The remote host
+PORT = 40000              # The same port as used by the server
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    s.sendall(b'Hello, world')
+    data = s.recv(1024)
+print('Received', data.decode())
