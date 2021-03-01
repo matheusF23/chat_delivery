@@ -96,6 +96,7 @@ async def chat_server(websocket, path):
                 await show_order(websocket)
             elif message[0] == 'finalizar':
                 await websocket.send('Pedido finalizado. Aguarde que um dia chega.')
+                await websocket.close()
             else:
                 await websocket.send("Olá, deseja realizar um pedido? As orientações estão acima")
     except:
