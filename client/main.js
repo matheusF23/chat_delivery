@@ -1,5 +1,5 @@
 
-var ws = new WebSocket("ws://127.0.0.1:8765/")
+var ws = new WebSocket("ws://127.0.0.1:8765/");
 
 document.addEventListener('keypress', (e) => {
     if (e.key == "Enter") {
@@ -24,7 +24,6 @@ function newMessage() {
 ws.onmessage = function (event) {
     var message = document.createElement("li");
     message.className = 'botLI'
-    var content = document.createTextNode(event.data);
     message.innerHTML = event.data;
     document.getElementById("chatUL").appendChild(message);
 };
